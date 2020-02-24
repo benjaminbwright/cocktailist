@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Ingredient.associate = function(models) {
     // associations can be defined here
+    // belongs to many cocktails
+    Ingredient.belongsToMany(models.Cocktail, {
+      through: 'CocktailIngredients'
+    });
   };
+  
   return Ingredient;
 };

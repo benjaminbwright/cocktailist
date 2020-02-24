@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const apiRoutes = require('./routes/apiRoutes');
+const db = require('./models')
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.get('*', (req,res) => {
   res.send('Your page not found. But, thanks for visiting.')
 });
 
-app.listen(PORT, () => {
-  console.log(`You runnin on ${PORT}`);
-})
+db.sequelize.sync({force: true}).then(function(){
+  app.listen(PORT, () => {
+    console.log(`You runnin on ${PORT}`);
+  });
+});
