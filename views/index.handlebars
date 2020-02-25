@@ -1,4 +1,12 @@
 <div class="app">
-  {{> ingredients/add }}  
-
+  {{!-- Ingredients form  --}}
+  {{> ingredients/add }}
+  <h2>Available Ingredients</h2>
+  <div class="available-ingredients">
+    <ul>
+    {{#each ingredients }}
+      <li>{{ name }}</li>
+    {{/each }}
+    </ul>
+  </div>
 </div>

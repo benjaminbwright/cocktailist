@@ -14,8 +14,8 @@ $(document).ready(() => {
 // Handles the submission 
 const handleSubmitIngredients = (e) => {
   e.preventDefault()
-  const name = ingredientNameInputEl.val()
-  const type = ingredientTypeInputEl.val()
+  const name = ingredientNameInputEl.val().trim();
+  const type = ingredientTypeInputEl.val().trim();
   console.log(name, type)
 
   $.ajax({
@@ -25,6 +25,7 @@ const handleSubmitIngredients = (e) => {
   })
   .done((response) => {
     console.log(response)
+    location.reload();
   })
 
 }
