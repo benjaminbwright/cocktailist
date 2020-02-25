@@ -1,13 +1,22 @@
 require('dotenv').config();
 const express = require('express');
+const exphbs = require("express-handlebars");
 const apiRoutes = require('./routes/apiRoutes');
+<<<<<<< HEAD
 const db = require('./models')
+=======
+const htmlRoutes = require('./routes/htmlRoutes');
+>>>>>>> master
 
 const app = express();
 
 const PORT = process.env.PORT || 8000;
 
-app.use('/api', apiRoutes);
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+app.use(htmlRoutes)
+// app.use('/api', apiRoutes);
 
 app.get('*', (req,res) => {
   res.send('Your page not found. But, thanks for visiting.')
