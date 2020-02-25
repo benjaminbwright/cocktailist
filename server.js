@@ -2,27 +2,33 @@ require('dotenv').config();
 const express = require('express');
 const exphbs = require("express-handlebars");
 const apiRoutes = require('./routes/apiRoutes');
-<<<<<<< HEAD
 const db = require('./models')
-=======
 const htmlRoutes = require('./routes/htmlRoutes');
->>>>>>> master
 
 const app = express();
 
 const PORT = process.env.PORT || 8000;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+db.Ingredient.create({
+  name: 'tequila',
+  type: 'liqour',
+  flavorProfile: 'agave'
+});
+
 app.use(htmlRoutes)
-// app.use('/api', apiRoutes);
+app.use('/api', apiRoutes);
 
 app.get('*', (req,res) => {
   res.send('Your page not found. But, thanks for visiting.')
 });
 
-db.sequelize.sync({force: true}).then(function(){
+db.sequelize.sync().then(function(){
   app.listen(PORT, () => {
     console.log(`You runnin on ${PORT}`);
   });

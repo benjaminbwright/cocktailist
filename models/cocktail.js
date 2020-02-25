@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
   Cocktail.associate = function(models) {
     // associations can be defined here
     // Cocktail has many ingredients
-    Cocktail.hasMany(models.Ingredient)
+    Cocktail.belongsToMany(models.Ingredient, {
+      through: 'CocktailIngredients'
+    })
   };
   return Cocktail;
 };
